@@ -8,6 +8,7 @@
 import urllib.request
 import requests
 import json
+import hashlib
 
 USER_AGENT = "BitBaan-API-Sample-Python"
 
@@ -19,6 +20,21 @@ class MALabLib:
     def __init__(self, server_address, api_key=''):
         self.server_address = server_address
         self.api_key = api_key
+
+    @staticmethod
+    def handle_return_value(return_value):
+        if return_value is False:
+            return {'success': False, 'error_code': 900}
+        else:
+            return return_value
+
+    @staticmethod
+    def get_sha256(file_path):
+        hash_sha256 = hashlib.sha256()
+        with open(file_path, 'rb') as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_sha256.update(chunk)
+        return hash_sha256.hexdigest()
 
     """
     Returns:
@@ -49,13 +65,6 @@ class MALabLib:
         except Exception:
             return False
 
-    @staticmethod
-    def handle_return_value(return_value):
-        if return_value is False:
-            return {'success': False, 'error_code': 900}
-        else:
-            return return_value
-
     """
     Returns:
         If the function succeeds, the return value is 0.
@@ -76,4 +85,9 @@ class MALabLib:
         if len(file_origin) != 0:
             params["fileorigin"] = file_origin
         returned_value = self.call_api_with_form_input('api/v1/scan', params, 'filedata', file_path)
+        return self.handle_return_value(returned_value)
+
+    def results(self, file_sha256, scan_id):
+        params = {'sha256': file_sha256, 'scan_id': scan_id, 'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/search/scan/results', params)
         return self.handle_return_value(returned_value)
