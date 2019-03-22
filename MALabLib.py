@@ -87,6 +87,11 @@ class MALabLib:
         returned_value = self.call_api_with_form_input('api/v1/scan', params, 'filedata', file_path)
         return self.handle_return_value(returned_value)
 
+    def rescan(self, file_sha256):
+        params = {'sha256': file_sha256, 'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/rescan', params)
+        return self.handle_return_value(returned_value)
+
     def results(self, file_sha256, scan_id):
         params = {'sha256': file_sha256, 'scan_id': scan_id, 'apikey': self.api_key}
         returned_value = self.call_api_with_json_input('api/v1/search/scan/results', params)
