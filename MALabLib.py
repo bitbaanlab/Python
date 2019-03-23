@@ -176,3 +176,36 @@ class MALabLib:
                   'captcha': captcha}
         returned_value = self.call_api_with_json_input('api/v1/user/register', params)
         return self.handle_return_value(returned_value)
+
+    def advanced_search(self, scan_id=None, file_name=None, malware_name=None, hash=None, origin=None, analyzed=None,
+                        has_origin=None, ot=None, ob=None, page=None, per_page=None):
+        params = {'apikey': self.api_key}
+        if scan_id is not None:
+            params["scan_id"] = scan_id
+        if file_name is not None:
+            params["filename"] = file_name
+        if malware_name is not None:
+            params["malware_name"] = malware_name
+        if hash is not None:
+            params["hash"] = hash
+        if origin is not None:
+            params["origin"] = origin
+        if analyzed is not None:
+            params["analyzed"] = analyzed
+        if has_origin is not None:
+            params["has_origin"] = has_origin
+        if ot is not None:
+            params["ot"] = ot
+        if ob is not None:
+            params["ob"] = ob
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+        returned_value = self.call_api_with_json_input('api/v1/search/scan/advanced', params)
+        return self.handle_return_value(returned_value)
+
+    def get_av_list(self):
+        params = {'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/search/av_list', params)
+        return self.handle_return_value(returned_value)
