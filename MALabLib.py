@@ -128,8 +128,8 @@ class MALabLib:
         returned_value = self.call_api_with_json_input('api/v1/search/scan/malware-name', params)
         return self.handle_return_value(returned_value)
 
-    def download_file(self, hash):
-        params = {'hash': hash, 'apikey': self.api_key}
+    def download_file(self, hash_value):
+        params = {'hash': hash_value, 'apikey': self.api_key}
         returned_value = self.call_api_with_json_input('api/v1/file/download', params)
         return self.handle_return_value(returned_value)
 
@@ -143,7 +143,7 @@ class MALabLib:
         return self.handle_return_value(returned_value)
 
     def add_comment(self, sha256, description):
-        params = {'sha256': sha256, 'description': description,'apikey': self.api_key}
+        params = {'sha256': sha256, 'description': description, 'apikey': self.api_key}
         returned_value = self.call_api_with_json_input('api/v1/comment/add', params)
         return self.handle_return_value(returned_value)
 
