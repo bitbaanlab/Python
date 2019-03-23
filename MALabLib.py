@@ -161,3 +161,18 @@ class MALabLib:
         params = {'comment_id': comment_id, 'apikey': self.api_key}
         returned_value = self.call_api_with_json_input('api/v1/comment/approve', params)
         return self.handle_return_value(returned_value)
+
+    def get_captcha(self):
+        params = {}
+        returned_value = self.call_api_with_json_input('api/v1/captcha', params)
+        return self.handle_return_value(returned_value)
+
+    def register(self, first_name, last_name, username, email, password, captcha):
+        params = {'firstname': first_name,
+                  'lastname': last_name,
+                  'username': username,
+                  'email': email,
+                  'password': password,
+                  'captcha': captcha}
+        returned_value = self.call_api_with_json_input('api/v1/user/register', params)
+        return self.handle_return_value(returned_value)
