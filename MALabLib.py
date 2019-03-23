@@ -6,6 +6,7 @@
 """
 
 import urllib.request
+import urllib.error
 import requests
 import json
 import hashlib
@@ -49,6 +50,10 @@ class MALabLib:
             req.add_header('Content-Length', len(json_data_as_bytes))
             response = urllib.request.urlopen(req, json_data_as_bytes)
             data = response.read()
+            values = json.loads(data)
+            return values
+        except urllib.error.HTTPError as e:
+            data = e.read()
             values = json.loads(data)
             return values
         except Exception:
