@@ -133,3 +133,31 @@ class MALabLib:
         returned_value = self.call_api_with_json_input('api/v1/file/download', params)
         return self.handle_return_value(returned_value)
 
+    def get_comments(self, sha256, page=None, per_page=None):
+        params = {'sha256': sha256, 'apikey': self.api_key}
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+        returned_value = self.call_api_with_json_input('api/v1/comment', params)
+        return self.handle_return_value(returned_value)
+
+    def add_comment(self, sha256, description):
+        params = {'sha256': sha256, 'description': description,'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/comment/add', params)
+        return self.handle_return_value(returned_value)
+
+    def edit_comment(self, comment_id, new_description):
+        params = {'comment_id': comment_id, 'description': new_description, 'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/comment/edit', params)
+        return self.handle_return_value(returned_value)
+
+    def delete_comment(self, comment_id):
+        params = {'comment_id': comment_id, 'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/comment/delete', params)
+        return self.handle_return_value(returned_value)
+
+    def approve_comment(self, comment_id):
+        params = {'comment_id': comment_id, 'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/comment/approve', params)
+        return self.handle_return_value(returned_value)
