@@ -96,3 +96,35 @@ class MALabLib:
         params = {'sha256': file_sha256, 'scan_id': scan_id, 'apikey': self.api_key}
         returned_value = self.call_api_with_json_input('api/v1/search/scan/results', params)
         return self.handle_return_value(returned_value)
+
+    def search_by_hash(self, sha256, ot=None, ob=None, page=None, per_page=None):
+        params = {'hash': sha256, 'apikey': self.api_key}
+        if ot is not None:
+            params["ot"] = ot
+        if ob is not None:
+            params["ob"] = ob
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+        returned_value = self.call_api_with_json_input('api/v1/search/scan/hash', params)
+        return self.handle_return_value(returned_value)
+
+    def search_by_malware_name(self, malware_name, ot=None, ob=None, page=None, per_page=None):
+        params = {'malware_name': malware_name, 'apikey': self.api_key}
+        if ot is not None:
+            params["ot"] = ot
+        if ob is not None:
+            params["ob"] = ob
+        if page is not None:
+            params["page"] = page
+        if per_page is not None:
+            params["per_page"] = per_page
+        returned_value = self.call_api_with_json_input('api/v1/search/scan/malware-name', params)
+        return self.handle_return_value(returned_value)
+
+    def download_file(self, hash):
+        params = {'hash': hash, 'apikey': self.api_key}
+        returned_value = self.call_api_with_json_input('api/v1/file/download', params)
+        return self.handle_return_value(returned_value)
+
