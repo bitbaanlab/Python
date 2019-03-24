@@ -102,8 +102,8 @@ class MALabLib:
         returned_value = self.call_api_with_json_input('api/v1/search/scan/results', params)
         return self.handle_return_value(returned_value)
 
-    def search_by_hash(self, sha256, ot=None, ob=None, page=None, per_page=None):
-        params = {'hash': sha256, 'apikey': self.api_key}
+    def search_by_hash(self, hash, ot=None, ob=None, page=None, per_page=None):
+        params = {'hash': hash, 'apikey': self.api_key}
         if ot is not None:
             params["ot"] = ot
         if ob is not None:
