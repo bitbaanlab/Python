@@ -53,9 +53,12 @@ class MALabLib:
             values = json.loads(data)
             return values
         except urllib.error.HTTPError as e:
-            data = e.read()
-            values = json.loads(data)
-            return values
+            try:
+                data = e.read()
+                values = json.loads(data)
+                return values
+            except Exception:
+                return False
         except Exception:
             return False
 
