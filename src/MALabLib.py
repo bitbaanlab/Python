@@ -47,10 +47,6 @@ class MALabLib:
                 for key in return_value["error"]:
                     print("Validation in: %s, %s" % (key, return_value["error"][key]))
 
-    """
-    Returns:
-        If the function fails, the return value is False.
-    """
     def call_with_json_input(self, api, json_input):
         try:
             req = urllib.request.Request(self.server_address + "/malab/v1/" + api)
@@ -74,11 +70,12 @@ class MALabLib:
 
     def call_with_form_input(self, api, data_input, file_param_name, file_path):
         try:
-            files = {file_param_name, open(file_path, 'rb')},
-            response = requests.post(self.server_address + "/malab/v1/" + api,
-                                     files=files,
-                                     data=data_input)
-            values = response.json()
-            return values
+            with open(file_path, 'rb') as file_handle:
+                files = [(file_param_name, ("file_to_upload", file_handle, "application/octet-stream"))]
+                response = requests.post(self.server_address + "/malab/v1/" + api,
+                                         files=files,
+                                         data=data_input)
+                values = response.json()
+                return values
         except:
             return {"success": False, "error_code": 900}

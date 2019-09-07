@@ -15,9 +15,9 @@ print("|  _ \| | __|  _ \ / _` |/ _` | '_ \  | |\/| | / _ \ | |   / _` | '_ \ ")
 print("| |_) | | |_| |_) | (_| | (_| | | | | | |  | |/ ___ \| |__| (_| | |_) |")
 print("|____/|_|\__|____/ \__,_|\__,_|_| |_| |_|  |_/_/   \_\_____\__,_|_.__/ \n")
 
-serveraddress = input("Please insert API server address [Default=http://malabbeta.bitbaan.com]: ")
+serveraddress = input("Please insert API server address [Default=https://apimalab.bitbaan.com]: ")
 if serveraddress == "":
-    serveraddress = "http://apimalabbeta.bitbaan.com"
+    serveraddress = "https://apimalab.bitbaan.com"
 malab = MALabLib.MALabLib(serveraddress)
 email = input("Please insert email address: ")
 password = input("Please insert your password: ")
