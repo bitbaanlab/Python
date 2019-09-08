@@ -31,21 +31,22 @@ class MALabLib:
         return hash_sha256.hexdigest()
 
     @staticmethod
-    def print_error(return_value):
-        print ("Error!")
+    def get_error(return_value):
+        error = ''
         if "error_code" in return_value:
-            print("Error code: %d" % return_value["error_code"])
+            error += ("Error code: %d\n" % return_value["error_code"])
         if "error_desc" in return_value:
-            print("Error description: %s" % return_value["error_desc"])
+            error += ("Error description: %s\n" % return_value["error_desc"])
         if "error_details_code" in return_value:
-            print("Error details code: %d" % return_value["error_details_code"])
+            error += ("Error details code: %d\n" % return_value["error_details_code"])
         if "error_details_desc" in return_value:
-            print("Error details description: %s" % return_value["error_details_desc"])
+            error += ("Error details description: %s\n" % return_value["error_details_desc"])
         if "status_code" in return_value:
-            print("Status code: %d" % return_value["status_code"])
+            error += ("Status code: %d\n" % return_value["status_code"])
             if return_value["status_code"] == 422 and "error" in return_value:
                 for key in return_value["error"]:
-                    print("Validation in: %s, %s" % (key, return_value["error"][key]))
+                    error += ("Validation in: %s, %s\n" % (key, return_value["error"][key]))
+        return error
 
     def call_with_json_input(self, api, json_input):
         try:

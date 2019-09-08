@@ -26,7 +26,7 @@ return_value = malab.call_with_json_input('user/login', {'email': email, 'passwo
 if return_value["success"] is True:
     print("You are logged in successfully.")
 else:
-    malab.print_error(return_value)
+    print(malab.get_error(return_value))
     sys.exit(0)
 
 apikey = return_value["apikey"]
@@ -36,8 +36,7 @@ if os.path.isfile(file_path) is False:
     sys.exit(0)
 file_name = os.path.basename(file_path)
 file_hash = malab.get_sha256(file_path)
-return_value = malab.call_with_form_input('file/scan', {'file_path': file_path,
-                                                        'file_name': file_name,
+return_value = malab.call_with_form_input('file/scan', {'file_name': file_name,
                                                         'apikey': apikey},
                                           'file_data', file_path)
 if return_value["success"] is True:
@@ -47,7 +46,7 @@ if return_value["success"] is True:
         print("Waiting for getting results...")
         return_value = malab.call_with_json_input('file/scan/result/get', {'hash': file_hash, 'apikey': apikey})
         if return_value["success"] is False:
-            malab.print_error(return_value)
+            print(malab.get_error(return_value))
             sys.exit(0)
         cls()
         for current_av_result in return_value["scan"]["results"]:
@@ -58,5 +57,5 @@ if return_value["success"] is True:
         is_finished = return_value["scan"]["is_finished"]
         time.sleep(3)
 else:
-    malab.print_error(return_value)
+    print(malab.get_error(return_value))
     sys.exit(0)
