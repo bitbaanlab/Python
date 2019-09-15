@@ -55,7 +55,7 @@ if return_value["success"] is True:
             elif current_av_result["result"] == "clean":  # file is clean
                 print("%s ==> %s" % (current_av_result["av_name"], "Clean"))
         is_finished = return_value["scan"]["is_finished"]
-        time.sleep(3)
+        time.sleep(2)
 else:
     print(malab.get_error(return_value))
     sys.exit(0)
