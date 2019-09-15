@@ -16,11 +16,9 @@ USER_AGENT = "BitBaan-API-Sample-Python"
 
 class MALabLib:
     server_address = ''
-    api_key = ''
 
-    def __init__(self, server_address, api_key=''):
+    def __init__(self, server_address):
         self.server_address = server_address
-        self.api_key = api_key
 
     @staticmethod
     def get_sha256(file_path):
