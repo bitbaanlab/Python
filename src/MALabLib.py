@@ -30,7 +30,7 @@ class MALabLib:
 
     @staticmethod
     def get_error(return_value):
-        error = ''
+        error = 'Error!\n'
         if "error_code" in return_value:
             error += ("Error code: %d\n" % return_value["error_code"])
         if "error_desc" in return_value:
