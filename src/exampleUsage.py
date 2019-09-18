@@ -19,10 +19,10 @@ serveraddress = input("Please insert API server address [Default=https://apimala
 if serveraddress == "":
     serveraddress = "https://apimalab.bitbaan.com"
 malab = MALabLib.MALabLib(serveraddress)
-email = input("Please insert email address: ")
+identifier = input("Please insert identifier (username, phone no or email): ")
 password = input("Please insert your password: ")
 
-return_value = malab.call_with_json_input('user/login', {'email': email, 'password': password})
+return_value = malab.call_with_json_input('user/login', {'identifier': identifier, 'password': password})
 if return_value["success"] is True:
     print("You are logged in successfully.")
 else:
